@@ -39,20 +39,23 @@
 				    leadingTabDepth = detectLeadingTab.length;
 				    console.log('Line='+ln+' Tab='+detectLeadingTab+' Depth='+leadingTabDepth);
 			    }
-			    if(detectPause!=null) {
+			    if(detectPause!=null || pause_counter>0) {
 				    if(pause_counter==0) {
 					    line = line.replace( new RegExp('^',''), '<ul>\n');
 				    }       
 				    if(leadingTabDepth < oldLeadingTabDepth) {
 					    line = line.replace( new RegExp('^',''), '</ul>\n');
 				    }
+				    // TODO: Replace - with all possible Markdown list patterns
 				    line = line.replace( new RegExp('(\t*)-(.*)',''), '$1<li class="fragment" data-fragment-index="'+pause_counter+'">$2');
 				    line = line.replace( new RegExp('(^\t*)-(.*)',''), '$1<li class="fragment" data-fragment-index="'+pause_counter+'">$2');
 				    line = line.replace( new RegExp('\\\\pause','g'), '</li>\n');
 				    if(leadingTabDepth > oldLeadingTabDepth) {
 					    line = line.replace( new RegExp('^',''), '<ul>\n');
 				    }
-				    pause_counter++;
+				    if(detectPause!=null) {
+				    	pause_counter++;
+				    }
 				    oldLeadingTabDepth = leadingTabDepth;
 			    }
 			    newtext += line+'\n';
