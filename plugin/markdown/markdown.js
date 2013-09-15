@@ -46,8 +46,8 @@
 				    if(leadingTabDepth < oldLeadingTabDepth) {
 					    line = line.replace( new RegExp('^',''), '</ul>\n');
 				    }
-				    line = line.replace( new RegExp('\t*-',''), '<li class="fragment" data-fragment-index="'+pause_counter+'"> ');
-				    line = line.replace( new RegExp('^\t*-',''), '<li class="fragment" data-fragment-index="'+pause_counter+'"> ');
+				    line = line.replace( new RegExp('(\t*)-(.*)',''), '$1<li class="fragment" data-fragment-index="'+pause_counter+'">$2');
+				    line = line.replace( new RegExp('(^\t*)-(.*)',''), '$1<li class="fragment" data-fragment-index="'+pause_counter+'">$2');
 				    line = line.replace( new RegExp('\\\\pause','g'), '</li>\n');
 				    if(leadingTabDepth > oldLeadingTabDepth) {
 					    line = line.replace( new RegExp('^',''), '<ul>\n');
